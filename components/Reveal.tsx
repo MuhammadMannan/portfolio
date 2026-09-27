@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { EASE_OUT } from "@/lib/motion";
 
@@ -50,18 +50,21 @@ export function RevealWords({
       variants={{ hidden: {}, show: { transition: { staggerChildren: 0.045 } } }}
     >
       {words.map((w, i) => (
-        <span key={i} className="word">
-          <motion.span
-            className="word__inner"
-            variants={{
-              hidden: { opacity: 0, y: "0.6em" },
-              show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
-            }}
-          >
-            {w}
-          </motion.span>
+        <Fragment key={i}>
+          <span className="word">
+            <motion.span
+              className="word__inner"
+              variants={{
+                hidden: { opacity: 0, y: "0.6em" },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
+              }}
+            >
+              {w}
+            </motion.span>
+          </span>
+          {/* The space sits between the word boxes; inside one it collapses. */}
           {i < words.length - 1 ? " " : null}
-        </span>
+        </Fragment>
       ))}
     </Tag>
   );
