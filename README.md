@@ -1,27 +1,33 @@
-# muhammadmannan — portfolio
+# Muhammad Mannan — portfolio
 
-A plain HTML/CSS/JS site. No build step, so Vercel serves it as-is.
+Next.js (App Router) + Motion, deployed on Vercel. Every push to `main` goes live automatically.
+
+## Run it locally
+```
+npm install
+npm run dev
+```
+Then open http://localhost:3000. Draft case studies only show up here, never on the live site.
 
 ## Add a Daily UI design
-1. Export the design from Figma as PNG (1600×1200 works best).
-2. Convert it to WebP and save it as `images/daily-ui/day-005.webp` (three-digit day number).
-3. Add one line to `daily-ui.js`:
-   ```js
-   { day: 5, title: 'App icon', image: '/images/daily-ui/day-005.webp', link: 'https://layers.to/…' },
+1. Export the frame from Figma as PNG at 1600×1200, convert it to WebP, and save it as `public/images/daily-ui/day-005.webp`.
+2. Add one line to `lib/daily-ui.ts`:
+   ```ts
+   { day: 5, title: "App icon", image: "/images/daily-ui/day-005.webp" },
    ```
-4. Commit and push. Vercel redeploys automatically.
+3. Push. Dates come from the day number (Day 1 = Sep 28, 2026), and each design appears on its own date.
 
-Dates are worked out from the day number (Day 1 = Sep 28, 2026). A design stays hidden until its date, so you can add several ahead of time.
+## Add a case study
+1. Copy `content/work/_template.mdx` to `content/work/<slug>.mdx` and write it.
+2. Put its images in `public/images/work/<slug>/` and use them with `<Figure src="..." width={1600} height={1000} caption="..." />`.
+3. Import it in `content/work/index.ts` and add an entry. Set `published: true` when it's ready.
 
-## Preview locally
-```
-python3 -m http.server 8000
-```
-Then open http://localhost:8000.
+The "Selected work" section, the nav link and section numbering update themselves.
 
-## Files
-- `index.html`: the page
-- `styles.css`: dark and light themes are the tokens at the top
-- `daily-ui.js`: the list of Daily UI designs
-- `main.js`: theme toggle and the Daily UI grid
-- `images/`: the portrait, the social preview image, and Daily UI shots
+## Where things live
+- `app/page.tsx`: the home page
+- `app/work/[slug]/page.tsx`: the case study page layout
+- `app/globals.css`: all styles; dark and light themes are the tokens at the top
+- `components/`: the hero, Daily UI grid and viewer, scroll reveals, nav, theme switch
+- `lib/daily-ui.ts`: the Daily UI list
+- `content/work/`: case studies
