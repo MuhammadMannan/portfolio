@@ -26,6 +26,7 @@ export const shots: Shot[] = [
   { day: 2, title: "Credit card checkout", image: "/images/daily-ui/day-002.webp" },
   { day: 3, title: "Landing page", image: "/images/daily-ui/day-003.webp" },
   { day: 4, title: "Calculator", image: "/images/daily-ui/day-004.webp" },
+  { day: 5, title: "App icon", image: "/images/daily-ui/day-005.webp" },
 ];
 
 /** Local midnight on the day this design goes live. */
