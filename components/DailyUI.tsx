@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { dateFor, formatDate, liveShots, pad, startLabel, type Shot } from "@/lib/daily-ui";
+import { liveShots, pad, startLabel, type Shot } from "@/lib/daily-ui";
 import { EASE_OUT } from "@/lib/motion";
 
 const LAYOUT_SPRING = { type: "spring", stiffness: 260, damping: 32 } as const;
@@ -14,7 +14,6 @@ export function DailyUIGrid() {
   const triggers = useRef(new Map<number, HTMLButtonElement>());
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  // Dates are checked in the visitor's browser so each design appears on its own day.
   useEffect(() => {
     setItems(liveShots(new Date()));
   }, []);
@@ -104,9 +103,7 @@ export function DailyUIGrid() {
                 />
               </motion.div>
               <span className="shot__meta">
-                <span className="muted">
-                  Day {pad(s.day)} · {formatDate(dateFor(s.day))}
-                </span>
+                <span className="muted">Day {pad(s.day)}</span>
                 <span className="shot__title">
                   {s.title} <span className="shot__arrow" aria-hidden="true">↗</span>
                 </span>
@@ -156,9 +153,7 @@ export function DailyUIGrid() {
                 exit={{ opacity: 0, transition: { duration: 0.1 } }}
               >
                 <p id="lightbox-title">
-                  <span className="muted">
-                    Day {pad(current.day)} · {formatDate(dateFor(current.day))}
-                  </span>{" "}
+                  <span className="muted">Day {pad(current.day)}</span>{" "}
                   {current.title}
                 </p>
                 <div className="lightbox__actions">

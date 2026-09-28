@@ -6,9 +6,7 @@
   image: file in /public/images/daily-ui/ (1600×1200 WebP works best)
   link:  optional — the post on Layers or Dribbble
 
-  Dates come from the day number: Day 1 = Sep 28, 2026, Day 2 = Sep 29, …
-  A design only appears on the site once its date arrives (in the visitor's
-  time zone), so you can add several ahead of time.
+  Every design shows on the site as soon as it's added here and pushed.
 */
 
 export type Shot = {
@@ -34,11 +32,9 @@ export function dateFor(day: number): Date {
   return new Date(START.year, START.month - 1, START.day + day - 1);
 }
 
-/** Designs whose date has arrived, newest first. */
-export function liveShots(now: Date): Shot[] {
-  return shots
-    .filter((s) => dateFor(s.day).getTime() <= now.getTime())
-    .sort((a, b) => b.day - a.day);
+/** Every design added so far, newest first. */
+export function liveShots(_now?: Date): Shot[] {
+  return [...shots].sort((a, b) => b.day - a.day);
 }
 
 export const pad = (n: number) => String(n).padStart(3, "0");

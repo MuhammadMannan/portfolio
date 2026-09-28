@@ -15,7 +15,7 @@ Then open http://localhost:3000. Draft case studies only show up here, never on 
    ```ts
    { day: 5, title: "App icon", image: "/images/daily-ui/day-005.webp" },
    ```
-3. Push. Dates come from the day number (Day 1 = Sep 28, 2026), and each design appears on its own date.
+3. Push. The design shows up on the site as soon as the deploy finishes.
 
 ## Add a case study
 1. Copy `content/work/_template.mdx` to `content/work/<slug>.mdx` and write it.
