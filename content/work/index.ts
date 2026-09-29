@@ -13,6 +13,7 @@
 */
 import type { ComponentType } from "react";
 import Template from "./_template.mdx";
+import MboTracker from "./mbo-tracker.mdx";
 
 export type CaseStudy = {
   slug: string;
@@ -28,6 +29,17 @@ export type CaseStudy = {
 };
 
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: "mbo-tracker",
+    title: "MBO Tracker",
+    category: "Desktop app · AI · Design system",
+    summary: "One consistent, AI-assisted way for sales teams to track, forecast and get coached on their MBOs, with a guided setup that gets non-technical users running local AI.",
+    role: "Solo designer and developer",
+    timeline: "[X weeks]",
+    tools: "React, Carbon Design System, IBM Granite, Ollama",
+    published: false,
+    Content: MboTracker,
+  },
   {
     slug: "template",
     title: "[Project title]",

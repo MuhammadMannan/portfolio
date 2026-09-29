@@ -1,0 +1,151 @@
+{/*
+  MBO Tracker case study. Draft: published is false in index.ts.
+  Each Figure placeholder names the screenshot file that replaces it
+  (see the Screenshot checklist in the case study doc). Images go in
+  /public/images/work/mbo-tracker/ as .webp.
+*/}
+
+## Overview
+
+Across the sales org, every team tracked MBOs differently, in PDFs, Excel sheets and Word docs. I designed and built MBO Tracker, a desktop app that brings objectives, progress, payout forecasting and AI coaching into one place. ELHs and managers can stop managing documents and focus on the conversations that matter.
+
+<Callout label="The result">
+  Tested with my team of 12. One teammate's struggle reshaped the AI setup, and my manager saw a path to scaling the tool across the org.
+</Callout>
+
+## The problem
+
+There was no single, consistent way to track MBOs across the sales org. Each team used its own format, and no one platform let someone track, document and get coached on their MBO without juggling several files.
+
+- **ELHs** switched between documents to answer basic questions like "Where am I on this objective?" and "What will I earn?"
+- **Managers** had no consistent, clean view across their ELHs, so one-on-ones were spent reconstructing status instead of coaching.
+- **Feedback** arrived only when a manager had time to review, which slowed everyone down.
+
+## Who it's for
+
+MBO Tracker serves ELHs and their managers today, and testing surfaced a third group for the future.
+
+- **ELHs** need all their objectives in one place, progress and payout understood at a glance, and feedback without waiting for a one-on-one.
+- **Managers** need a consistent, clean view of each ELH's objectives, so check-ins focus on coaching.
+- **Senior leadership** (future) would gain a view across managers and their ELHs if the tool scales.
+
+## Constraints that shaped the design
+
+1. **Sensitive data.** MBOs are tied to compensation, so the data had to stay on the user's machine.
+2. **Non-technical users and AI.** Most people have never installed a local AI model, so the AI features couldn't assume they had.
+3. **Messy existing data.** People already kept MBOs in spreadsheets of every shape, so the app had to meet them where they were.
+4. **An IBM tool.** It needed to look and feel like it belonged at IBM, which meant building on the Carbon Design System.
+
+## Getting non-technical users set up with local AI
+
+The AI features depend on Ollama and an IBM Granite model running on the user's computer. Most sales professionals have never installed a local AI model, opened a terminal or checked their laptop's RAM. If setup felt technical or risky, people would skip it, and the app's most valuable features would go unused.
+
+### How the setup experience evolved
+
+1. **README instructions.** Setup lived outside the app, in a document most users would never open.
+2. **A link in the app.** I added a link to Ollama's download page, but users still had to switch between the app, the website and a terminal.
+3. **A guided setup inside the app.** I brought the instructions into the app, so users could follow every step without losing their place.
+
+The lesson: every time a user has to leave the product, there's a chance they won't come back.
+
+### Designing for a hesitant user
+
+I designed the final guide around five questions a hesitant user would ask.
+
+**"Why should I bother, and is this safe?"** Before asking for any effort, the guide answers the trust questions: it's free, it works offline, and no data leaves your machine. Free, Offline and IBM Granite tags make that scannable in a second.
+
+**"Which option is right for me?"** Instead of explaining parameter counts, I framed the model choice in terms people already know: their laptop and how long they'll wait. Each option lists honest trade-offs. The smaller model is preselected, with a recommendation explaining why it's enough, so users who don't want to decide can simply continue.
+
+<Figure placeholder="[Screenshot: 09-setup-model-cards.png]" caption="Hardware in plain terms, honest trade-offs and a smart default." />
+
+**"What exactly do I do?"** Setup is three numbered steps, each with one clear action. The guide sets expectations up front, like download size and generation time, and calls out platform differences. When someone picks the larger model, the command in step 2 updates automatically, so they can't copy the wrong one.
+
+<Figure placeholder="[Screenshot: 10-setup-8b-selected.png]" caption="The command follows the user's choice." />
+
+**"Did it work?"** The app detects when Ollama is running and updates the guide and AI features to match. Users don't have to guess whether setup succeeded or restart anything.
+
+<Figure placeholder="[Screenshot: 11-setup-ai-ready.png]" caption="The app confirms when setup worked." />
+
+**"What do I get at the end?"** Step 3 sends the user back to the dashboard to generate their first coaching summary, so setup ends with a result rather than just an install.
+
+### Never blocking the user
+
+The guide appears as a pop-up during onboarding, but skipping it has no penalty. The app works fully without AI, and the same guide stays available at the bottom of the dashboard for whenever the user is ready.
+
+<Figure placeholder="[Screenshot: 06-first-launch.png]" caption="First launch." />
+
+<Figure placeholder="[Screenshot: 07-setup-onboarding-popup.png]" caption="Entry point one: the setup guide during onboarding." />
+
+<Figure placeholder="[Screenshot: 08-setup-dashboard-guide.png]" caption="Entry point two: the same guide, available on the dashboard anytime." />
+
+## AI import, with the human in control
+
+Instead of making people re-enter their MBOs, the app lets them upload the spreadsheet they already have. Granite suggests how its columns map to the tracker, and the user reviews and adjusts the suggestions before anything is imported. The AI does the tedious work, but the user always confirms.
+
+<Figure placeholder="[Screenshot: 12-import-upload.png]" caption="Start from the spreadsheet you already have." />
+
+<Figure placeholder="[Screenshot: 13-import-ai-mapping.png]" caption="AI suggests, the user decides." />
+
+## Making payout understandable at a glance
+
+Payout tiers and progress math are hard to read in a spreadsheet. The dashboard calculates progress automatically and shows which tier you're in, so "What will I earn?" takes seconds to answer.
+
+<Figure placeholder="[Screenshot: 02-dashboard-payout.png]" caption="Progress and payout tier, calculated automatically." />
+
+## Three views, one source of truth
+
+Each view answers a different question about the same data.
+
+- The **dashboard** answers "How am I doing overall?"
+- The **table** is for detailed editing.
+- The **kanban board** answers "What should I work on next?"
+
+<Figure placeholder="[Screenshot: 03-view-dashboard.png]" caption="Dashboard: how am I doing overall?" />
+
+<Figure placeholder="[Screenshot: 04-view-table.png]" caption="Table: detailed editing." />
+
+<Figure placeholder="[Screenshot: 05-view-kanban.png]" caption="Kanban: what should I work on next?" />
+
+## Private by default
+
+Everything runs locally, with no accounts, cloud or external APIs. For compensation data, that's what makes people willing to use the app. Users can also turn the AI features off entirely.
+
+## Iteration: from generic React to Carbon
+
+I first built the interface with basic React components. Because I wanted this to feel like a focused IBM tool, I rebuilt it with the Carbon Design System. That meant learning to apply a mature design system rather than inventing my own patterns. [Add one or two specific examples, such as a component you had to rethink or a pattern Carbon changed.]
+
+<Figure placeholder="[Screenshot: 15-iteration-react-before.png]" caption="Before: plain React components." />
+
+<Figure placeholder="[Screenshot: 16-iteration-carbon-after.png]" caption="After: the same screen rebuilt with Carbon." />
+
+## Testing with real users
+
+I tested MBO Tracker with my whole team of 12, including my manager, walking everyone through setup and the core workflows. Most people got through without trouble.
+
+One teammate who was less comfortable with technology had installed Ollama but didn't understand how to "pull" the Granite model in the terminal. Ollama's install page only covers installing Ollama itself, not downloading a model. I had been treating two tools as one step.
+
+I rewrote the guide so pulling the model became its own clearly explained step: the exact command to copy, what it does, how big the download is, and a reassurance that the model stays on her machine.
+
+## Outcome
+
+The team got through setup and the core workflows, and my manager saw MBO Tracker as something the team could adopt. He recognized its value in time savings and how easily it could scale across the org.
+
+He also pointed to a bigger opportunity. If the tool scaled, senior leadership would gain a consistent view of how managers and their ELHs are doing across the org, which no one had before.
+
+Expected impact:
+
+- Faster feedback for ELHs through AI coaching summaries
+- Shorter one-on-ones, because status no longer has to be rebuilt by hand
+- One consistent format for MBOs across teams
+
+<Figure placeholder="[Screenshot: 14-ai-coaching-summary.png]" caption="An AI coaching summary, generated entirely on the user's machine." />
+
+## What I'd do next
+
+Testing showed that the terminal was the biggest barrier for non-technical users, so removing it comes first.
+
+- **One-click model download.** Let users download the model with a button inside the app, removing the terminal step entirely.
+- **A roll-up view.** Managers would see all their ELHs, and senior leadership would see all managers, as my manager suggested.
+- **Privacy at scale.** A shared view needs shared data, which conflicts with the local-first design that makes the app trustworthy today. Solving that tension is the key design problem for the next version.
+
+[What would you do differently if you started again? For example, testing with teammates earlier, or sketching flows before building.]
