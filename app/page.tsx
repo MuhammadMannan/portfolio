@@ -4,7 +4,6 @@ import { Hero } from "@/components/Hero";
 import { NowStrip } from "@/components/NowStrip";
 import { DailyUIGrid } from "@/components/DailyUI";
 import { Reveal, RevealWords, SectionHead } from "@/components/Reveal";
-import { startLabel } from "@/lib/daily-ui";
 import { visibleCaseStudies } from "@/content/work";
 
 const BACKGROUND = [
@@ -82,7 +81,7 @@ export default function Home() {
         <SectionHead
           num={num()}
           title="Daily UI"
-          kicker={`100 days · one design a day · since ${startLabel}, 2026`}
+          kicker="100 days · one design a day"
           aside={
             <a className="link" href="https://layers.to/muhammad_mannan" target="_blank" rel="noopener">
               See all on Layers ↗
