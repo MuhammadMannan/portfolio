@@ -38,7 +38,7 @@ export const caseStudies: CaseStudy[] = [
     timeline: "2.5 weeks, plus ongoing updates",
     cover: "/images/work/mbo-tracker/01-cover-dashboard.webp",
     tools: "IBM Bob (designed in code), React, Carbon Design System, IBM Granite, Ollama",
-    published: false,
+    published: true,
     Content: MboTracker,
   },
   {
