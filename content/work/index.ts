@@ -36,6 +36,7 @@ export const caseStudies: CaseStudy[] = [
     summary: "One consistent, AI-assisted way for sales teams to track, forecast and get coached on their MBOs, with a guided setup that gets non-technical users running local AI.",
     role: "Solo designer and developer",
     timeline: "[X weeks]",
+    cover: "/images/work/mbo-tracker/01-cover-dashboard.webp",
     tools: "IBM Bob (designed in code), React, Carbon Design System, IBM Granite, Ollama",
     published: false,
     Content: MboTracker,

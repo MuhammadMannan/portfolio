@@ -1,8 +1,6 @@
 {/*
   MBO Tracker case study. Draft: published is false in index.ts.
-  Each Figure placeholder names the screenshot file that replaces it
-  (see the Screenshot checklist in the case study doc). Images go in
-  /public/images/work/mbo-tracker/ as .webp.
+  Screenshots live in /public/images/work/mbo-tracker/ and use sample data.
 */}
 
 ## Overview
@@ -56,15 +54,11 @@ I designed the final guide around five questions a hesitant user would ask.
 
 **"Which option is right for me?"** Instead of explaining parameter counts, I framed the model choice in terms people already know: their laptop and how long they'll wait. Each option lists honest trade-offs. The smaller model is preselected, with a recommendation explaining why it's enough, so users who don't want to decide can simply continue.
 
-<Figure placeholder="[Screenshot: 09-setup-model-cards.png]" caption="Hardware in plain terms, honest trade-offs and a smart default." />
+<Figure src="/images/work/mbo-tracker/07-setup-onboarding.webp" width={2400} height={3072} alt="The AI setup guide showing Ollama not detected, two Granite model options and three setup steps" caption="The setup guide on first launch: a clear status, hardware in plain terms, honest trade-offs and a smart default." />
 
 **"What exactly do I do?"** Setup is three numbered steps, each with one clear action. The guide sets expectations up front, like download size and generation time, and calls out platform differences. When someone picks the larger model, the command in step 2 updates automatically, so they can't copy the wrong one.
 
-<Figure placeholder="[Screenshot: 10-setup-8b-selected.png]" caption="The command follows the user's choice." />
-
-**"Did it work?"** The app detects when Ollama is running and updates the guide and AI features to match. Users don't have to guess whether setup succeeded or restart anything.
-
-<Figure placeholder="[Screenshot: 11-setup-ai-ready.png]" caption="The app confirms when setup worked." />
+**"Did it work?"** The app detects whether Ollama is running. If it isn't, the guide says so plainly and offers an "I've installed Ollama, check again" button, so users never have to restart the app or guess whether setup succeeded. Once Ollama is detected, the AI features switch on.
 
 **"What do I get at the end?"** Step 3 sends the user back to the dashboard to generate their first coaching summary, so setup ends with a result rather than just an install.
 
@@ -72,25 +66,35 @@ I designed the final guide around five questions a hesitant user would ask.
 
 The guide appears as a pop-up during onboarding, but skipping it has no penalty. The app works fully without AI, and the same guide stays available at the bottom of the dashboard for whenever the user is ready.
 
-<Figure placeholder="[Screenshot: 06-first-launch.png]" caption="First launch." />
+Onboarding follows the same principle. A welcome screen asks only for a name, a short tour points out the key parts of the app, and every step can be skipped. Setup offers a clear "Skip, use app without AI" option, with a note that AI can be turned on anytime from Settings.
 
-<Figure placeholder="[Screenshot: 07-setup-onboarding-popup.png]" caption="Entry point one: the setup guide during onboarding." />
+<Figure src="/images/work/mbo-tracker/06-first-launch.webp" width={2400} height={1505} alt="MBO Tracker welcome screen reading Track your goals. Exceed them." caption="First launch asks for one thing: your name." />
 
-<Figure placeholder="[Screenshot: 08-setup-dashboard-guide.png]" caption="Entry point two: the same guide, available on the dashboard anytime." />
+<Figure src="/images/work/mbo-tracker/06b-welcome-tour.webp" width={2400} height={1505} alt="The dashboard with a welcome tour pop-up" caption="A six-step tour that takes about 30 seconds and can be skipped anytime." />
+
+<Figure src="/images/work/mbo-tracker/08-setup-dashboard.webp" width={2400} height={2041} alt="The AI performance summary section with the setup guide expanded below it" caption="Entry point two: once AI is ready, summaries are one click away, and the same setup guide stays on the dashboard." />
 
 ## AI import, with the human in control
 
 Instead of making people re-enter their MBOs, the app lets them upload the spreadsheet they already have. Granite suggests how its columns map to the tracker, and the user reviews and adjusts the suggestions before anything is imported. The AI does the tedious work, but the user always confirms.
 
-<Figure placeholder="[Screenshot: 12-import-upload.png]" caption="Start from the spreadsheet you already have." />
+AI mapping is optional and explained before it runs, so users know Granite will only suggest a mapping. While it works, the progress screen says exactly what's happening, first reading the column headers and then translating values like status and time period into the app's format. Nothing is imported until the user has reviewed every field, each with a confidence level and sample values from their own file.
 
-<Figure placeholder="[Screenshot: 13-import-ai-mapping.png]" caption="AI suggests, the user decides." />
+<Figure src="/images/work/mbo-tracker/12a-import-ai-toggle.webp" width={2400} height={1505} alt="Import dialog with an AI-assisted mapping toggle" caption="AI-assisted mapping is a choice, explained before it runs." />
+
+<Figure src="/images/work/mbo-tracker/12-import-upload.webp" width={2400} height={1505} alt="Import dialog with a drag-and-drop area and replace or merge options" caption="Start from the spreadsheet you already have, and choose whether to replace or merge." />
+
+<Figure src="/images/work/mbo-tracker/12b-import-analysing.webp" width={2400} height={1505} alt="Import progress: Granite is analysing the file" caption="Progress messages explain what Granite is doing at each step." />
+
+<Figure src="/images/work/mbo-tracker/13-import-ai-mapping.webp" width={2400} height={1505} alt="Mapping review table with schema fields, mapped columns, confidence and sample values" caption="AI suggests, the user decides: every field shows its match, a confidence level and sample values." />
+
+<Figure src="/images/work/mbo-tracker/13b-import-ready.webp" width={2400} height={1505} alt="Import summary showing 30 objectives ready to import" caption="A final check before anything changes." />
 
 ## Making payout understandable at a glance
 
 Payout tiers and progress math are hard to read in a spreadsheet. The dashboard calculates progress automatically and shows which tier you're in, so "What will I earn?" takes seconds to answer.
 
-<Figure placeholder="[Screenshot: 02-dashboard-payout.png]" caption="Progress and payout tier, calculated automatically." />
+<Figure src="/images/work/mbo-tracker/02-payout-tiers.webp" width={2400} height={390} alt="Payout tier table with Tier 3 marked as current" caption="The payout tiers, with the current one highlighted automatically." />
 
 ## Three views, one source of truth
 
@@ -100,15 +104,17 @@ Each view answers a different question about the same data.
 - The **table** is for detailed editing.
 - The **kanban board** answers "What should I work on next?"
 
-<Figure placeholder="[Screenshot: 03-view-dashboard.png]" caption="Dashboard: how am I doing overall?" />
+<Figure src="/images/work/mbo-tracker/01-cover-dashboard.webp" width={2400} height={1505} alt="Dashboard showing the current payout tier, 81% average completion and status breakdown" caption="Dashboard: how am I doing overall?" />
 
-<Figure placeholder="[Screenshot: 04-view-table.png]" caption="Table: detailed editing." />
+<Figure src="/images/work/mbo-tracker/04-view-table.webp" width={2400} height={1505} alt="Table of objectives with category, time period, target, actual, percent complete and status" caption="Table: detailed editing, with filters and search." />
 
-<Figure placeholder="[Screenshot: 05-view-kanban.png]" caption="Kanban: what should I work on next?" />
+<Figure src="/images/work/mbo-tracker/05-view-kanban.webp" width={2400} height={1505} alt="Kanban board with Not Started, In Progress, Complete and Exceeded columns" caption="Kanban: what should I work on next?" />
 
 ## Private by default
 
-Everything runs locally, with no accounts, cloud or external APIs. For compensation data, that's what makes people willing to use the app. Users can also turn the AI features off entirely.
+Everything runs locally, with no accounts, cloud or external APIs. For compensation data, that's what makes people willing to use the app. Users can also turn the AI features off entirely, and a clearly marked danger zone lets them wipe all their data in one step.
+
+<Figure src="/images/work/mbo-tracker/15-settings.webp" width={2400} height={1885} alt="Settings page with import, AI features toggle, account and data sections" caption="Settings: import, an AI on/off switch and full control over your data." />
 
 ## Iteration: designing in code
 
@@ -136,7 +142,7 @@ Expected impact:
 - Shorter one-on-ones, because status no longer has to be rebuilt by hand
 - One consistent format for MBOs across teams
 
-<Figure placeholder="[Screenshot: 14-ai-coaching-summary.png]" caption="An AI coaching summary, generated entirely on the user's machine." />
+<Figure src="/images/work/mbo-tracker/14-ai-coaching-summary.webp" width={2400} height={562} alt="AI performance summary written by IBM Granite 3.3" caption="An AI coaching summary, generated entirely on the user's machine." />
 
 ## What I'd do next
 
