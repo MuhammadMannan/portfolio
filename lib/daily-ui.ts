@@ -3,8 +3,9 @@
 
   day:   the challenge number
   title: the challenge prompt
-  image: file in /public/images/daily-ui/ (1600×1200 WebP works best)
-  link:  optional — the post on Layers or Dribbble
+  image:   file in /public/images/daily-ui/ (1600×1200 WebP works best)
+  caption: optional — a sentence or two shown when someone opens the design
+  link:    optional — the post on Layers or Dribbble
 
   Every design shows on the site as soon as it's added here and pushed.
 */
@@ -13,6 +14,7 @@ export type Shot = {
   day: number;
   title: string;
   image: string;
+  caption?: string;
   link?: string;
 };
 
@@ -20,12 +22,48 @@ export const TOTAL_DAYS = 100;
 const START = { year: 2026, month: 9, day: 28 };
 
 export const shots: Shot[] = [
-  { day: 1, title: "Sign up", image: "/images/daily-ui/day-001.webp" },
-  { day: 2, title: "Credit card checkout", image: "/images/daily-ui/day-002.webp" },
-  { day: 3, title: "Landing page", image: "/images/daily-ui/day-003.webp" },
-  { day: 4, title: "Calculator", image: "/images/daily-ui/day-004.webp" },
-  { day: 5, title: "App icon", image: "/images/daily-ui/day-005.webp" },
-  { day: 6, title: "User profile", image: "/images/daily-ui/day-006.webp" },
+  {
+    day: 1,
+    title: "Sign up",
+    image: "/images/daily-ui/day-001.webp",
+    caption:
+      "Sign-up and sign-in built from one shared layout, so returning users recognize the form straight away. Monospace type and a dotted grid give it a developer-tool feel.",
+  },
+  {
+    day: 2,
+    title: "Credit card checkout",
+    image: "/images/daily-ui/day-002.webp",
+    caption:
+      "A mobile checkout that leads with the total, previews the card as it's filled in, and keeps the form to four fields with one clear Pay Now button.",
+  },
+  {
+    day: 3,
+    title: "Landing page",
+    image: "/images/daily-ui/day-003.webp",
+    caption:
+      "A concept landing page for CMF Buds Pro 2. The dot-matrix type carries over from the brand into the key specs, so the product and its numbers do the talking.",
+  },
+  {
+    day: 4,
+    title: "Calculator",
+    image: "/images/daily-ui/day-004.webp",
+    caption:
+      "Two states of one calculator: the result, and an operator selected mid-calculation, shown by the inverted × key. A running history keeps earlier sums in view.",
+  },
+  {
+    day: 5,
+    title: "App icon",
+    image: "/images/daily-ui/day-005.webp",
+    caption:
+      "A single bold mark on a white tile, with a warm orange-to-red gradient running through the icon and the background behind it.",
+  },
+  {
+    day: 6,
+    title: "User profile",
+    image: "/images/daily-ui/day-006.webp",
+    caption:
+      "A colleague profile for a company directory: contact actions up front, then tabs for overview, projects and org, with skills, current work and badges below.",
+  },
 ];
 
 /** Local midnight on the day this design goes live. */

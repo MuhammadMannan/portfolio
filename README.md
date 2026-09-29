@@ -13,9 +13,9 @@ Then open http://localhost:3000. Draft case studies only show up here, never on 
 1. Export the frame from Figma as PNG at 1600×1200, convert it to WebP, and save it as `public/images/daily-ui/day-005.webp`.
 2. Add one line to `lib/daily-ui.ts`:
    ```ts
-   { day: 5, title: "App icon", image: "/images/daily-ui/day-005.webp" },
+   { day: 5, title: "App icon", image: "/images/daily-ui/day-005.webp", caption: "One or two sentences about the design." },
    ```
-3. Push. The design shows up on the site as soon as the deploy finishes.
+3. Push. The design shows up on the site as soon as the deploy finishes. The caption appears when someone opens the design.
 
 ## Add a case study
 1. Copy `content/work/_template.mdx` to `content/work/<slug>.mdx` and write it.

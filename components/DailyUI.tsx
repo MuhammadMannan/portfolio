@@ -130,6 +130,7 @@ export function DailyUIGrid() {
               role="dialog"
               aria-modal="true"
               aria-labelledby="lightbox-title"
+              aria-describedby={current.caption ? "lightbox-caption" : undefined}
               onClick={(e) => e.stopPropagation()}
               onKeyDown={trapFocus}
             >
@@ -152,20 +153,26 @@ export function DailyUIGrid() {
                 animate={{ opacity: 1, y: 0, transition: { delay: 0.2, duration: 0.4 } }}
                 exit={{ opacity: 0, transition: { duration: 0.1 } }}
               >
-                <p id="lightbox-title">
-                  <span className="muted">Day {pad(current.day)}</span>{" "}
-                  {current.title}
-                </p>
-                <div className="lightbox__actions">
-                  {current.link && (
-                    <a className="link" href={current.link} target="_blank" rel="noopener">
-                      View post ↗
-                    </a>
-                  )}
-                  <button type="button" className="btn btn--ghost btn--sm" onClick={close} autoFocus>
-                    Close <span aria-hidden="true">✕</span>
-                  </button>
+                <div className="lightbox__head">
+                  <p id="lightbox-title" className="lightbox__title">
+                    <span className="muted">Day {pad(current.day)}</span> {current.title}
+                  </p>
+                  <div className="lightbox__actions">
+                    {current.link && (
+                      <a className="link" href={current.link} target="_blank" rel="noopener">
+                        View post ↗
+                      </a>
+                    )}
+                    <button type="button" className="btn btn--ghost btn--sm" onClick={close} autoFocus>
+                      Close <span aria-hidden="true">✕</span>
+                    </button>
+                  </div>
                 </div>
+                {current.caption && (
+                  <p id="lightbox-caption" className="lightbox__caption">
+                    {current.caption}
+                  </p>
+                )}
               </motion.div>
             </div>
           </motion.div>

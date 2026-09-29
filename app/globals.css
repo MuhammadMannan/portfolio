@@ -573,7 +573,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: min(92vw, 1200px, calc((100svh - 140px) * 4 / 3));
+  width: min(92vw, 1200px, calc((100svh - 230px) * 4 / 3));
   cursor: default;
 }
 .lightbox__frame {
@@ -586,11 +586,24 @@ button {
 }
 .lightbox__bar {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+}
+.lightbox__head {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px 24px;
-  font-size: 14px;
+}
+.lightbox__title {
+  font-weight: 500;
+}
+.lightbox__caption {
+  max-width: 72ch;
+  line-height: 1.7;
+  color: var(--soft);
 }
 .lightbox__actions {
   display: flex;
