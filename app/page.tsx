@@ -24,6 +24,13 @@ const BACKGROUND = [
   },
 ];
 
+const TOOLS = [
+  { label: "Design", items: ["Figma", "FigJam", "Carbon Design System"] },
+  { label: "Research & inspiration", items: ["Miro", "Mobbin"] },
+  { label: "AI", items: ["Claude", "ChatGPT", "IBM Bob"] },
+  { label: "Build & share", items: ["GitHub", "Vercel", "Layers"] },
+];
+
 export default function Home() {
   const work = visibleCaseStudies();
   // Section numbers shift automatically once "Selected work" appears.
@@ -106,10 +113,23 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
-        <Reveal className="panel">
+        <Reveal className="panel panel--stack">
           <div className="stack-sm">
             <p className="label">Tools</p>
-            <p>Figma</p>
+            <div className="tools">
+              {TOOLS.map((group) => (
+                <div key={group.label} className="tools__group">
+                  <p className="tools__label">{group.label}</p>
+                  <ul className="chips">
+                    {group.items.map((t) => (
+                      <li key={t} className="chip">
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="stack-sm">
             <p className="label">Currently learning</p>

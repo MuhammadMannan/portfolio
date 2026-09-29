@@ -648,6 +648,51 @@ button {
   border: 1px solid var(--line);
 }
 
+.panel--stack {
+  grid-template-columns: 1fr;
+  gap: 36px;
+}
+.tools {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 4px;
+}
+.tools__group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tools__label {
+  font-size: 13px;
+  color: var(--muted);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  transition: border-color 0.2s;
+}
+.chip:hover {
+  border-color: var(--fg);
+}
+@media (max-width: 1100px) {
+  .tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .tools {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Contact ---------- */
 .contact {
   margin-top: 128px;
