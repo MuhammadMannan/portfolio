@@ -120,7 +120,15 @@ Everything runs locally, with no accounts, cloud or external APIs. For compensat
 
 I designed MBO Tracker directly in code with IBM Bob, rather than in Figma first. Working in the real app meant every design decision was tested with real interactions and real data. It also meant my team tested a working product, not a prototype.
 
-The biggest shift came along the way. I started with basic React components, then moved the interface onto the Carbon Design System so it would feel like a focused IBM tool. That meant learning to apply a mature design system rather than inventing my own patterns. [Add one or two specific examples, such as a component you had to rethink or a pattern Carbon changed.]
+The biggest shift came along the way. I started with basic React components, then moved the interface onto the Carbon Design System so it would feel like a focused IBM tool. With plain components, I was inventing patterns as I went. Carbon's patterns come with rules, and following them changed how the app works, not just how it looks.
+
+- **Updating progress became its own focused task.** Instead of reopening a whole objective every time a number changes, the Update progress dialog asks one question: "How many have you completed so far?" Carbon's number input with steppers makes that a click or two. The target is locked here, with a note that it's set in the Edit dialog, so a quick update can't accidentally change a goal. A live progress bar shows where the new number lands against the target and the 125% cap before saving.
+- **Status changes moved into an overflow menu.** Each row's menu offers one-click status changes, with the current status greyed out, and keeps full editing separate under Edit. The table stays clean, and the most common actions are still one click away.
+- **Every dialog works the same way.** Import, Add objective and Update progress all follow Carbon's modal pattern: title at the top, then Cancel on the left and the primary action on the right across the bottom. Once someone learns one dialog, they know them all.
+
+<Figure src="/images/work/mbo-tracker/16-update-progress.webp" width={2400} height={1505} alt="Update progress dialog with a number input, a locked target and a live progress bar" caption="Updating progress is one question, with the target locked and a live preview before saving." />
+
+<Figure src="/images/work/mbo-tracker/17-status-menu.webp" width={2400} height={1505} alt="Table row overflow menu with status options and Edit" caption="Status changes are one click away in each row's menu, with full editing kept separate." />
 
 ## Testing with real users
 
