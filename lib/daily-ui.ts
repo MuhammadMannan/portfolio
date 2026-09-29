@@ -64,6 +64,13 @@ export const shots: Shot[] = [
     caption:
       "A colleague profile for a company directory: contact actions up front, then tabs for overview, projects and org, with skills, current work and badges below.",
   },
+  {
+    day: 7,
+    title: "Settings",
+    image: "/images/daily-ui/day-007.webp",
+    caption:
+      "Appearance settings for Pebble, a desktop app. Each choice previews itself, from theme thumbnails to a live font-size sample, and nothing applies until you hit Save changes.",
+  },
 ];
 
 /** Local midnight on the day this design goes live. */
