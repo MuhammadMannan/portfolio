@@ -71,6 +71,13 @@ export const shots: Shot[] = [
     caption:
       "Appearance settings for Pebble, a desktop app. Each choice previews itself, from theme thumbnails to a live font-size sample, and nothing applies until you hit Save changes.",
   },
+  {
+    day: 8,
+    title: "404 page",
+    image: "/images/daily-ui/day-008.webp",
+    caption:
+      "A 404 page that turns being lost into a sailing theme, with a dotted route drifting off the map. One clear way back home, plus a link to report the broken page.",
+  },
 ];
 
 /** Local midnight on the day this design goes live. */
