@@ -67,9 +67,9 @@ export const shots: Shot[] = [
   {
     day: 7,
     title: "Settings",
-    image: "/images/daily-ui/day-007-v2.webp",
+    image: "/images/daily-ui/day-007.webp",
     caption:
-      "Appearance settings for Pebble, a desktop app. A live preview shows each change as you make it, and an unsaved-changes badge beside Save makes clear nothing applies until you confirm.",
+      "Appearance settings for Pebble, a desktop app. Each choice previews itself, from theme thumbnails to a live font-size sample, and nothing applies until you hit Save changes.",
   },
   {
     day: 8,
