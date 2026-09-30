@@ -870,6 +870,31 @@ button {
   line-height: 1.5;
   color: var(--fg);
 }
+.cs-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 2em;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.cs-stats__value {
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--fg);
+}
+.cs-stats__label {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted, inherit);
+}
+@media (max-width: 640px) {
+  .cs-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 .cs__next {
   max-width: 720px;
   margin: 128px auto 0;

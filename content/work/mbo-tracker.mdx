@@ -1,167 +1,75 @@
 {/*
-  MBO Tracker case study. Draft: published is false in index.ts.
-  Screenshots live in /public/images/work/mbo-tracker/ and use sample data.
+  MBO Tracker case study. Short on purpose: screenshots carry the story,
+  text explains the decisions. The long version lives in the case study doc.
 */}
 
 ## Overview
 
-Across the sales org, every team tracked MBOs differently, in PDFs, Excel sheets and Word docs. I designed and built MBO Tracker, a desktop app that brings objectives, progress, payout forecasting and AI coaching into one place. ELHs and managers can stop managing documents and focus on the conversations that matter.
+Every team in the sales org tracked MBOs differently, in PDFs, Excel sheets and Word docs. I designed and built MBO Tracker, a desktop app that puts objectives, payout progress and AI coaching in one place.
 
-<Callout label="The result">
-  Tested with my team of 12. One teammate's struggle reshaped the AI setup, and my manager saw a path to scaling the tool across the org.
-</Callout>
+<Stats items={[
+  { value: "12", label: "teammates tested it" },
+  { value: "3", label: "views of the same data" },
+  { value: "100%", label: "on-device, no cloud" },
+  { value: "2.5 wks", label: "to design and build" },
+]} />
 
 ## The problem
 
-There was no single, consistent way to track MBOs across the sales org. Each team used its own format, and no one platform let someone track, document and get coached on their MBO without juggling several files.
+- **ELHs** switched between files to answer "Where am I?" and "What will I earn?"
+- **Managers** spent one-on-ones rebuilding status instead of coaching.
+- **Compensation data** is sensitive, so it had to stay on the user's machine.
 
-- **ELHs** switched between documents to answer basic questions like "Where am I on this objective?" and "What will I earn?"
-- **Managers** had no consistent, clean view across their ELHs, so one-on-ones were spent reconstructing status instead of coaching.
-- **Feedback** arrived only when a manager had time to review, which slowed everyone down.
+## 1. Local AI that non-technical users can set up
 
-## Who it's for
+The AI runs on the user's own computer, and most salespeople have never installed an AI model. Setup moved from a README, to a link, to a guide inside the app, so nobody has to leave the product.
 
-MBO Tracker serves ELHs and their managers today, and testing surfaced a third group for the future.
+<Figure src="/images/work/mbo-tracker/07-setup-onboarding.webp" width={2400} height={3072} alt="The AI setup guide showing Ollama not detected, two Granite model options and three setup steps" caption="Plain-language hardware advice, a recommended default, three steps, and a way to check again or skip." />
 
-- **ELHs** need all their objectives in one place, progress and payout understood at a glance, and feedback without waiting for a one-on-one.
-- **Managers** need a consistent, clean view of each ELH's objectives, so check-ins focus on coaching.
-- **Senior leadership** (future) would gain a view across managers and their ELHs if the tool scales.
+Skipping costs nothing. The app works fully without AI, and the same guide stays on the dashboard for later.
 
-## Constraints that shaped the design
+<Figure src="/images/work/mbo-tracker/08-setup-dashboard.webp" width={2400} height={2041} alt="The AI performance summary section with the setup guide below it" caption="Once AI is ready, a coaching summary is one click away." />
 
-1. **Sensitive data.** MBOs are tied to compensation, so the data had to stay on the user's machine.
-2. **Non-technical users and AI.** Most people have never installed a local AI model, so the AI features couldn't assume they had.
-3. **Messy existing data.** People already kept MBOs in spreadsheets of every shape, so the app had to meet them where they were.
-4. **An IBM tool.** It needed to look and feel like it belonged at IBM, which meant building on the Carbon Design System.
+## 2. AI suggests, the user decides
 
-## Getting non-technical users set up with local AI
+Users import the spreadsheet they already have. Granite maps its columns to the app, and nothing is imported until the user has reviewed every match.
 
-The AI features depend on Ollama and an IBM Granite model running on the user's computer. Most sales professionals have never installed a local AI model, opened a terminal or checked their laptop's RAM. If setup felt technical or risky, people would skip it, and the app's most valuable features would go unused.
+<Figure src="/images/work/mbo-tracker/13-import-ai-mapping.webp" width={2400} height={1505} alt="Mapping review table with schema fields, mapped columns, confidence and sample values" caption="Each field shows its match, a confidence level and sample values from the user's file." />
 
-### How the setup experience evolved
+## 3. Payout at a glance
 
-1. **README instructions.** Setup lived outside the app, in a document most users would never open.
-2. **A link in the app.** I added a link to Ollama's download page, but users still had to switch between the app, the website and a terminal.
-3. **A guided setup inside the app.** I brought the instructions into the app, so users could follow every step without losing their place.
+The app calculates progress and highlights the current payout tier, so "What will I earn?" takes seconds.
 
-The lesson: every time a user has to leave the product, there's a chance they won't come back.
+<Figure src="/images/work/mbo-tracker/02-payout-tiers.webp" width={2400} height={390} alt="Payout tier table with Tier 3 marked as current" caption="The current tier, highlighted automatically." />
 
-### Designing for a hesitant user
-
-I designed the final guide around five questions a hesitant user would ask.
-
-**"Why should I bother, and is this safe?"** Before asking for any effort, the guide answers the trust questions: it's free, it works offline, and no data leaves your machine. Free, Offline and IBM Granite tags make that scannable in a second.
-
-**"Which option is right for me?"** Instead of explaining parameter counts, I framed the model choice in terms people already know: their laptop and how long they'll wait. Each option lists honest trade-offs. The smaller model is preselected, with a recommendation explaining why it's enough, so users who don't want to decide can simply continue.
-
-<Figure src="/images/work/mbo-tracker/07-setup-onboarding.webp" width={2400} height={3072} alt="The AI setup guide showing Ollama not detected, two Granite model options and three setup steps" caption="The setup guide on first launch: a clear status, hardware in plain terms, honest trade-offs and a smart default." />
-
-**"What exactly do I do?"** Setup is three numbered steps, each with one clear action. The guide sets expectations up front, like download size and generation time, and calls out platform differences. When someone picks the larger model, the command in step 2 updates automatically, so they can't copy the wrong one.
-
-**"Did it work?"** The app detects whether Ollama is running. If it isn't, the guide says so plainly and offers an "I've installed Ollama, check again" button, so users never have to restart the app or guess whether setup succeeded. Once Ollama is detected, the AI features switch on.
-
-**"What do I get at the end?"** Step 3 sends the user back to the dashboard to generate their first coaching summary, so setup ends with a result rather than just an install.
-
-### Never blocking the user
-
-The guide appears as a pop-up during onboarding, but skipping it has no penalty. The app works fully without AI, and the same guide stays available at the bottom of the dashboard for whenever the user is ready.
-
-Onboarding follows the same principle. A welcome screen asks only for a name, a short tour points out the key parts of the app, and every step can be skipped. Setup offers a clear "Skip, use app without AI" option, with a note that AI can be turned on anytime from Settings.
-
-<Figure src="/images/work/mbo-tracker/06-first-launch.webp" width={2400} height={1505} alt="MBO Tracker welcome screen reading Track your goals. Exceed them." caption="First launch asks for one thing: your name." />
-
-<Figure src="/images/work/mbo-tracker/06b-welcome-tour.webp" width={2400} height={1505} alt="The dashboard with a welcome tour pop-up" caption="A six-step tour that takes about 30 seconds and can be skipped anytime." />
-
-<Figure src="/images/work/mbo-tracker/08-setup-dashboard.webp" width={2400} height={2041} alt="The AI performance summary section with the setup guide expanded below it" caption="Entry point two: once AI is ready, summaries are one click away, and the same setup guide stays on the dashboard." />
-
-## AI import, with the human in control
-
-Instead of making people re-enter their MBOs, the app lets them upload the spreadsheet they already have. Granite suggests how its columns map to the tracker, and the user reviews and adjusts the suggestions before anything is imported. The AI does the tedious work, but the user always confirms.
-
-AI mapping is optional and explained before it runs, so users know Granite will only suggest a mapping. While it works, the progress screen says exactly what's happening, first reading the column headers and then translating values like status and time period into the app's format. Nothing is imported until the user has reviewed every field, each with a confidence level and sample values from their own file.
-
-<Figure src="/images/work/mbo-tracker/12a-import-ai-toggle.webp" width={2400} height={1505} alt="Import dialog with an AI-assisted mapping toggle" caption="AI-assisted mapping is a choice, explained before it runs." />
-
-<Figure src="/images/work/mbo-tracker/12-import-upload.webp" width={2400} height={1505} alt="Import dialog with a drag-and-drop area and replace or merge options" caption="Start from the spreadsheet you already have, and choose whether to replace or merge." />
-
-<Figure src="/images/work/mbo-tracker/12b-import-analysing.webp" width={2400} height={1505} alt="Import progress: Granite is analysing the file" caption="Progress messages explain what Granite is doing at each step." />
-
-<Figure src="/images/work/mbo-tracker/13-import-ai-mapping.webp" width={2400} height={1505} alt="Mapping review table with schema fields, mapped columns, confidence and sample values" caption="AI suggests, the user decides: every field shows its match, a confidence level and sample values." />
-
-<Figure src="/images/work/mbo-tracker/13b-import-ready.webp" width={2400} height={1505} alt="Import summary showing 30 objectives ready to import" caption="A final check before anything changes." />
-
-## Making payout understandable at a glance
-
-Payout tiers and progress math are hard to read in a spreadsheet. The dashboard calculates progress automatically and shows which tier you're in, so "What will I earn?" takes seconds to answer.
-
-<Figure src="/images/work/mbo-tracker/02-payout-tiers.webp" width={2400} height={390} alt="Payout tier table with Tier 3 marked as current" caption="The payout tiers, with the current one highlighted automatically." />
-
-## Three views, one source of truth
-
-Each view answers a different question about the same data.
-
-- The **dashboard** answers "How am I doing overall?"
-- The **table** is for detailed editing.
-- The **kanban board** answers "What should I work on next?"
-
-<Figure src="/images/work/mbo-tracker/01-cover-dashboard.webp" width={2400} height={1505} alt="Dashboard showing the current payout tier, 81% average completion and status breakdown" caption="Dashboard: how am I doing overall?" />
+## 4. Three views, one source of truth
 
 <Figure src="/images/work/mbo-tracker/04-view-table.webp" width={2400} height={1505} alt="Table of objectives with category, time period, target, actual, percent complete and status" caption="Table: detailed editing, with filters and search." />
 
 <Figure src="/images/work/mbo-tracker/05-view-kanban.webp" width={2400} height={1505} alt="Kanban board with Not Started, In Progress, Complete and Exceeded columns" caption="Kanban: what should I work on next?" />
 
-## Private by default
+## Designing in code
 
-Everything runs locally, with no accounts, cloud or external APIs. For compensation data, that's what makes people willing to use the app. Users can also turn the AI features off entirely, and a clearly marked danger zone lets them wipe all their data in one step.
+I designed directly in code with IBM Bob, so my team tested a working product, not a prototype. Moving from plain React to Carbon changed how the app works:
 
-<Figure src="/images/work/mbo-tracker/15-settings.webp" width={2400} height={1885} alt="Settings page with import, AI features toggle, account and data sections" caption="Settings: import, an AI on/off switch and full control over your data." />
+- Updating progress became one focused question, with the target locked.
+- Status changes moved into a one-click row menu.
+- Every dialog follows the same layout, so learning one teaches them all.
 
-## Iteration: designing in code
+<Figure src="/images/work/mbo-tracker/16-update-progress.webp" width={2400} height={1505} alt="Update progress dialog with a number input, a locked target and a live progress bar" caption="One question, a locked target and a live preview before saving." />
 
-I designed MBO Tracker directly in code with IBM Bob, rather than in Figma first. Working in the real app meant every design decision was tested with real interactions and real data. It also meant my team tested a working product, not a prototype.
+## Testing
 
-The biggest shift came along the way. I started with basic React components, then moved the interface onto the Carbon Design System so it would feel like a focused IBM tool. With plain components, I was inventing patterns as I went. Carbon's patterns come with rules, and following them changed how the app works, not just how it looks.
+I tested with my team of 12, including my manager. One teammate installed Ollama but got stuck downloading the model, because Ollama's site doesn't explain that step. I made it its own step with the exact command to copy.
 
-- **Updating progress became its own focused task.** Instead of reopening a whole objective every time a number changes, the Update progress dialog asks one question: "How many have you completed so far?" Carbon's number input with steppers makes that a click or two. The target is locked here, with a note that it's set in the Edit dialog, so a quick update can't accidentally change a goal. A live progress bar shows where the new number lands against the target and the 125% cap before saving.
-- **Status changes moved into an overflow menu.** Each row's menu offers one-click status changes, with the current status greyed out, and keeps full editing separate under Edit. The table stays clean, and the most common actions are still one click away.
-- **Every dialog works the same way.** Import, Add objective and Update progress all follow Carbon's modal pattern: title at the top, then Cancel on the left and the primary action on the right across the bottom. Once someone learns one dialog, they know them all.
-
-<Figure src="/images/work/mbo-tracker/16-update-progress.webp" width={2400} height={1505} alt="Update progress dialog with a number input, a locked target and a live progress bar" caption="Updating progress is one question, with the target locked and a live preview before saving." />
-
-<Figure src="/images/work/mbo-tracker/17-status-menu.webp" width={2400} height={1505} alt="Table row overflow menu with status options and Edit" caption="Status changes are one click away in each row's menu, with full editing kept separate." />
-
-## Testing with real users
-
-I tested MBO Tracker with my whole team of 12, including my manager, walking everyone through setup and the core workflows. Most people got through without trouble.
-
-One teammate who was less comfortable with technology had installed Ollama but didn't understand how to "pull" the Granite model in the terminal. Ollama's install page only covers installing Ollama itself, not downloading a model. I had been treating two tools as one step.
-
-I rewrote the guide so pulling the model became its own clearly explained step: the exact command to copy, what it does, how big the download is, and a reassurance that the model stays on her machine.
-
-## Outcome
-
-The team got through setup and the core workflows, and my manager saw MBO Tracker as something the team could adopt. He recognized its value in time savings and how easily it could scale across the org.
-
-He also pointed to a bigger opportunity. If the tool scaled, senior leadership would gain a consistent view of how managers and their ELHs are doing across the org, which no one had before.
-
-Expected impact:
-
-- Faster feedback for ELHs through AI coaching summaries
-- Shorter one-on-ones, because status no longer has to be rebuilt by hand
-- One consistent format for MBOs across teams
+<Callout label="Manager feedback">
+  If this scales, senior leadership could see how every manager and ELH is doing, across the org.
+</Callout>
 
 <Figure src="/images/work/mbo-tracker/14-ai-coaching-summary.webp" width={2400} height={562} alt="AI performance summary written by IBM Granite 3.3" caption="An AI coaching summary, generated entirely on the user's machine." />
 
-## What I'd do next
+## Next time
 
-Testing showed that the terminal was the biggest barrier for non-technical users, so removing it comes first.
-
-- **One-click model download.** Let users download the model with a button inside the app, removing the terminal step entirely.
-- **A roll-up view.** Managers would see all their ELHs, and senior leadership would see all managers, as my manager suggested.
-- **Privacy at scale.** A shared view needs shared data, which conflicts with the local-first design that makes the app trustworthy today. Solving that tension is the key design problem for the next version.
-
-## What I'd do differently
-
-- **Test more widely.** I tested with one team and one manager. Next time I'd test across several teams with different managers, to hear more perspectives on how MBOs are tracked and coached.
-- **Explore in Figma first.** Designing in code with IBM Bob was fast, but every change went straight into the app. Starting in Figma would have let me compare directions side by side before committing to one.
-- **Sketch the flows before building.** Mapping out key flows like onboarding, setup and import on paper first would have surfaced problems earlier, including the model-download step my teammate got stuck on.
+- **Remove the terminal:** a one-click model download.
+- **Test wider:** more teams, more managers.
+- **Explore before building:** sketch flows and try directions in Figma first.

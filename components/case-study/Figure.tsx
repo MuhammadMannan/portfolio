@@ -48,3 +48,17 @@ export function Callout({ label, children }: { label?: string; children: ReactNo
     </Reveal>
   );
 }
+
+/** A row of headline numbers, e.g. [{ value: "12", label: "teammates tested it" }]. */
+export function Stats({ items }: { items: { value: string; label: string }[] }) {
+  return (
+    <Reveal className="cs-stats">
+      {items.map((item) => (
+        <div key={item.label} className="cs-stats__item">
+          <p className="cs-stats__value">{item.value}</p>
+          <p className="cs-stats__label">{item.label}</p>
+        </div>
+      ))}
+    </Reveal>
+  );
+}
