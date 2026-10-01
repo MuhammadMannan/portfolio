@@ -51,7 +51,7 @@ export const caseStudies: CaseStudy[] = [
     timeline: "Sep 2026 – present",
     cover: "/images/work/mise/01-cover.webp",
     tools: "Claude Design, WCAG contrast checks, Expo / React Native codebase",
-    published: false,
+    published: true,
     Content: Mise,
   },
   {
