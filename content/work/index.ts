@@ -50,7 +50,7 @@ export const caseStudies: CaseStudy[] = [
     role: "Freelance UI/UX designer",
     timeline: "Sep 2026 – present",
     cover: "/images/work/mise/01-cover.webp",
-    tools: "Claude Design, WCAG contrast checks, Expo / React Native codebase",
+    tools: "Figma, WCAG contrast checks, Expo / React Native codebase",
     published: true,
     Content: Mise,
   },
