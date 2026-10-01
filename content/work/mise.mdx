@@ -1,0 +1,90 @@
+{/*
+  Mise case study. Freelance UX/IA redesign of a pantry-first cooking app.
+  Screens carry the story; text explains the decisions.
+*/}
+
+## Overview
+
+Mise is a cooking app built around what's already in your kitchen: it tracks the pantry, flags food that's about to expire, and lines up meals around it. The app worked, but its interface hid that value. As the freelance UI/UX designer, I redesigned its navigation, key flows and accessibility while keeping the brand.
+
+<Stats items={[
+  { value: "23", label: "screens redesigned" },
+  { value: "8 → 3", label: "decisions to add a pantry item" },
+  { value: "6 → 1", label: "add buttons, now one Add tab" },
+  { value: "3", label: "WCAG contrast failures fixed" },
+]} />
+
+## The problem
+
+The visual style was already strong, so the question wasn't how the app should look. It was whether a tired person could decide what to cook, and then cook it, without hunting.
+
+- **Big headers, little content.** Every screen opened with a two-line serif headline that filled a quarter of the first view.
+- **Two tabs doing one job.** Today and Discover both listed expiring food and matching recipes.
+- **Scattered entry points.** Six different add buttons across four tabs; saved recipes hidden behind an icon.
+- **Forms that ask too much.** Adding one pantry item meant eight fields, including a raw `2026-10-03` date.
+
+<Figure src="/images/work/mise/02-before.webp" width={2400} height={1400} alt="Four screens of the original app: Today, Discover, Pantry and Add to pantry" caption="The app before: polished, but heavy headers and repeated content push the useful parts below the fold." />
+
+## Audit
+
+I reviewed every screen against usability heuristics and read the app's code to confirm how each feature behaves. I also measured the brand palette against WCAG AA: muted text (3.85:1), white on the copper button (4.26:1) and the amber date labels (2.78:1) all failed.
+
+## 1. One job per tab
+
+I rebuilt the navigation around the three things people come to Mise for: deciding, capturing and cooking. Discover and Saved merged into one Recipes tab, and a single Add button now handles voice, pantry items, groceries and recipes.
+
+<Figure src="/images/work/mise/11-ia.webp" width={2400} height={1667} alt="Diagram comparing the old navigation with entry points scattered across 4 tabs to the new one with a single Add button" caption="Before: extra screens behind buttons in every tab. After: four tabs plus one Add button, each with a single job." />
+
+## 2. Today answers “what's for dinner?”
+
+The hero card that only linked to another tab is gone. Today now opens on a resume card while you're cooking, a strip of food to use soon in plain time (Tomorrow, 2 days), and recipes that say how much you already have.
+
+<Figure src="/images/work/mise/03-today.webp" width={2400} height={1760} alt="Before and after of the Today screen" caption="“You have 5 of 5” and “Need 1” let people choose at a glance." />
+
+## 3. Recipes: find and keep in one place
+
+<Figure src="/images/work/mise/04-recipes.webp" width={2400} height={1760} alt="Before and after of Discover, now the Recipes tab" caption="Saved is a tab, not an icon. Long category and cuisine chip rows became filters." />
+
+## 4. A pantry you can scan
+
+Fridge, Freezer and Pantry became tabs with counts, so empty sections disappear. Filters and sort no longer look identical, and a Use soon group links straight to recipes.
+
+<Figure src="/images/work/mise/05-pantry.webp" width={2400} height={1760} alt="Before and after of the Pantry screen" caption="Rows read as name, amount and time left. The quantity stepper moved into item detail." />
+
+## 5. Adding food in three decisions
+
+One smart field reads “2 lb potatoes” into a name and amount. Location is three large targets, and the date is a set of presets with a suggested default. Rare cases moved under More options.
+
+<Figure src="/images/work/mise/06-add-item.webp" width={2400} height={1760} alt="Before and after of the add pantry item form" caption="Eight fields became what, where and when." />
+
+<Figure src="/images/work/mise/10-add-flow.webp" width={2400} height={1500} alt="The Add sheet, voice entry and add pantry item screens" caption="Every way to add starts from one sheet. Voice shows what Mise heard before anything is saved." />
+
+## 6. Can I cook this?
+
+Each ingredient shows whether it's in the pantry, and a 4-of-5 meter with one Add to list button replaces a separate review step.
+
+<Figure src="/images/work/mise/07-recipe.webp" width={2400} height={1760} alt="Before and after of the recipe screen" caption="Ingredients and Steps are tabs, which halves the scroll." />
+
+## 7. Built for messy hands
+
+Cook mode shows one step at a time in large type, with a big timer and Back and Next buttons in thumb reach. When two recipes cook together, it nudges you when to start the next one.
+
+<Figure src="/images/work/mise/08-cook.webp" width={2400} height={1760} alt="Before and after of cook mode" caption="“In 9 min: start the potatoes” surfaces scheduling logic the app already had." />
+
+<Figure src="/images/work/mise/13-flow-cook.webp" width={2400} height={1006} alt="Seven-step user flow from Today to Wrap up" caption="The main flow, from deciding what to cook to saving leftovers. Each step names what the user taps next." />
+
+## 8. A list that explains itself
+
+<Figure src="/images/work/mise/09-list.webp" width={2400} height={1760} alt="Before and after of the grocery list" caption="Items say which recipe they're for. Developer copy like “connect a household” became a Share button." />
+
+## Same brand, made accessible
+
+I kept the typefaces, palette and shapes, and darkened only what failed contrast. Copper stays as an accent; buttons use a deeper copper that passes at 4.98:1.
+
+<Figure src="/images/work/mise/12-system.webp" width={2400} height={1833} alt="Design system board with color tokens, contrast fixes, type scale and components" caption="Three contrast fixes, a 28 px type size for cook mode, and 44 px minimum touch targets." />
+
+## What's next
+
+- **Test it:** five home cooks, four tasks, timed against the current build.
+- **Swipe actions** on pantry rows, so “used one” stays one tap.
+- **Hand-off:** map the new tokens and components back to the app's code.

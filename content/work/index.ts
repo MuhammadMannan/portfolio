@@ -14,6 +14,7 @@
 import type { ComponentType } from "react";
 import Template from "./_template.mdx";
 import MboTracker from "./mbo-tracker.mdx";
+import Mise from "./mise.mdx";
 
 export type CaseStudy = {
   slug: string;
@@ -40,6 +41,18 @@ export const caseStudies: CaseStudy[] = [
     tools: "IBM Bob (designed in code), React, Carbon Design System, IBM Granite, Ollama",
     published: true,
     Content: MboTracker,
+  },
+  {
+    slug: "mise",
+    title: "Mise",
+    category: "Mobile app · UX redesign · Information architecture",
+    summary: "A redesign of a pantry-first cooking app so people can decide what to cook, add what they bought and cook with messy hands, without hunting through the interface.",
+    role: "Freelance UI/UX designer",
+    timeline: "Sep 2026 – present",
+    cover: "/images/work/mise/01-cover.webp",
+    tools: "Claude Design, WCAG contrast checks, Expo / React Native codebase",
+    published: true,
+    Content: Mise,
   },
   {
     slug: "template",
