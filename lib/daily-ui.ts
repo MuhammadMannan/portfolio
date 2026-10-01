@@ -78,6 +78,13 @@ export const shots: Shot[] = [
     caption:
       "A 404 page that turns being lost into a sailing theme, with a dotted route drifting off the map. One clear way back home, plus a link to report the broken page.",
   },
+  {
+    day: 9,
+    title: "Music player",
+    image: "/images/daily-ui/day-009.webp",
+    caption:
+      "A dark now-playing screen where the album art sets the mood. The next and previous albums peek in at the edges, and every control sits in one panel within thumb reach.",
+  },
 ];
 
 /** Local midnight on the day this design goes live. */
