@@ -48,7 +48,7 @@ export const caseStudies: CaseStudy[] = [
     category: "Mobile app · UX redesign · Information architecture",
     summary: "A redesign of a pantry-first cooking app so people can decide what to cook, add what they bought and cook with messy hands, without hunting through the interface.",
     role: "Freelance UI/UX designer",
-    timeline: "[timeline]",
+    timeline: "Sep 2026 – present",
     cover: "/images/work/mise/01-cover.webp",
     tools: "Claude Design, WCAG contrast checks, Expo / React Native codebase",
     published: false,
