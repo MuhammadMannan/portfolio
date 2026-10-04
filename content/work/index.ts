@@ -15,6 +15,7 @@ import type { ComponentType } from "react";
 import Template from "./_template.mdx";
 import MboTracker from "./mbo-tracker.mdx";
 import Mise from "./mise.mdx";
+import DayFlow from "./dayflow.mdx";
 
 export type CaseStudy = {
   slug: string;
@@ -53,6 +54,18 @@ export const caseStudies: CaseStudy[] = [
     tools: "Figma, WCAG contrast checks, Expo / React Native codebase",
     published: true,
     Content: Mise,
+  },
+  {
+    slug: "dayflow",
+    title: "DayFlow",
+    category: "Mobile app · UX redesign · Flutter",
+    summary: "A redesign and rebuild of my own day planner, so unfinished tasks carry forward, the phone's calendar sits beside them, and a forgiving streak keeps people coming back.",
+    role: "Designer and developer (personal project)",
+    timeline: "Oct 2026",
+    cover: "/images/work/dayflow/01-cover.webp",
+    tools: "Figma (variables, light and dark modes), Flutter, Firebase, iOS EventKit",
+    published: true,
+    Content: DayFlow,
   },
   {
     slug: "template",
