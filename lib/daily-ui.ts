@@ -85,6 +85,13 @@ export const shots: Shot[] = [
     caption:
       "A dark now-playing screen where the album art sets the mood. The next and previous albums peek in at the edges, and every control sits in one panel within thumb reach.",
   },
+  {
+    day: 10,
+    title: "Share sheet",
+    image: "/images/daily-ui/day-010.webp",
+    caption:
+      "A playful mobile share sheet that puts the people you share with most up front, keeps Copy link one tap away, and confirms with a quick toast once the link is on your clipboard.",
+  },
 ];
 
 /** Local midnight on the day this design goes live. */
