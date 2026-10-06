@@ -92,6 +92,13 @@ export const shots: Shot[] = [
     caption:
       "A playful mobile share sheet that puts the people you share with most up front, keeps Copy link one tap away, and confirms with a quick toast once the link is on your clipboard.",
   },
+  {
+    day: 11,
+    title: "Flash message",
+    image: "/images/daily-ui/day-011.webp",
+    caption:
+      "Error and success flashes for a database export. The error is stamped right above the table and matches the highlighted rows, asks you to review ambiguous dates instead of guessing, and the success message stays put until you download the file.",
+  },
 ];
 
 /** Local midnight on the day this design goes live. */
