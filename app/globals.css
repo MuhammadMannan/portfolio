@@ -856,6 +856,20 @@ button {
   aspect-ratio: 16 / 8;
   border: 0;
 }
+.cs-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+.cs-compare__item .label {
+  margin-bottom: 10px;
+}
+@media (max-width: 860px) {
+  .cs-compare {
+    grid-template-columns: 1fr;
+  }
+}
 .cs-callout {
   margin-top: 2em;
   padding: 28px 32px;

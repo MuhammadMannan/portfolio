@@ -1,75 +1,197 @@
 {/*
-  MBO Tracker case study. Short on purpose: screenshots carry the story,
-  text explains the decisions. The long version lives in the case study doc.
+  MBO Tracker case study, in two versions.
+  Version 1: designed and built in code with IBM Bob, tested with 12 teammates.
+  Version 2: audit after a designer review, Carbon redesign in Figma, then a critique pass.
+  Before screenshots are from the built v1 app. After screenshots are Figma frames.
 */}
 
 ## Overview
 
 Every team in the sales org tracked MBOs differently, in PDFs, Excel sheets and Word docs. I designed and built MBO Tracker, a desktop app that puts objectives, payout progress and AI coaching in one place.
 
+My team used the first version. Then a designer told me it looked "very AI-generated." She was right, so I audited it and redesigned every screen in Figma with IBM's Carbon Design System. This case study covers both versions and why each change was made.
+
 <Stats items={[
-  { value: "12", label: "teammates tested it" },
-  { value: "3", label: "views of the same data" },
+  { value: "12", label: "teammates tested version 1" },
+  { value: "21", label: "screens and states redesigned in Figma" },
+  { value: "9", label: "issues fixed in a final critique" },
   { value: "100%", label: "on-device, no cloud" },
-  { value: "2.5 wks", label: "to design and build" },
 ]} />
 
 ## The problem
 
-- **ELHs** switched between files to answer "Where am I?" and "What will I earn?"
+- **Sellers** switched between files to answer "Where am I?" and "What will I earn?"
 - **Managers** spent one-on-ones rebuilding status instead of coaching.
 - **Compensation data** is sensitive, so it had to stay on the user's machine.
 
-## 1. Local AI that non-technical users can set up
+## Version 1: designed in code
 
-The AI runs on the user's own computer, and most salespeople have never installed an AI model. Setup moved from a README, to a link, to a guide inside the app, so nobody has to leave the product.
+I designed directly in code with IBM Bob, so my team tested a working product, not a prototype. It had a dashboard, a table, a Kanban board, spreadsheet import with AI column matching, and coaching from IBM Granite running on the user's own computer.
 
-<Figure src="/images/work/mbo-tracker/07-setup-onboarding.webp" width={2400} height={3072} alt="The AI setup guide showing Ollama not detected, two Granite model options and three setup steps" caption="Plain-language hardware advice, a recommended default, three steps, and a way to check again or skip." />
+<Figure src="/images/work/mbo-tracker/01-cover-dashboard.webp" width={2400} height={1505} alt="The version 1 dashboard with a payout tier banner, four colored stat cards, a donut chart and completion bars" caption="Version 1 dashboard." />
 
-Skipping costs nothing. The app works fully without AI, and the same guide stays on the dashboard for later.
-
-<Figure src="/images/work/mbo-tracker/08-setup-dashboard.webp" width={2400} height={2041} alt="The AI performance summary section with the setup guide below it" caption="Once AI is ready, a coaching summary is one click away." />
-
-## 2. AI suggests, the user decides
-
-Users import the spreadsheet they already have. Granite maps its columns to the app, and nothing is imported until the user has reviewed every match.
-
-<Figure src="/images/work/mbo-tracker/13-import-ai-mapping.webp" width={2400} height={1505} alt="Mapping review table with schema fields, mapped columns, confidence and sample values" caption="Each field shows its match, a confidence level and sample values from the user's file." />
-
-## 3. Payout at a glance
-
-The app calculates progress and highlights the current payout tier, so "What will I earn?" takes seconds.
-
-<Figure src="/images/work/mbo-tracker/02-payout-tiers.webp" width={2400} height={390} alt="Payout tier table with Tier 3 marked as current" caption="The current tier, highlighted automatically." />
-
-## 4. Three views, one source of truth
-
-<Figure src="/images/work/mbo-tracker/04-view-table.webp" width={2400} height={1505} alt="Table of objectives with category, time period, target, actual, percent complete and status" caption="Table: detailed editing, with filters and search." />
-
-<Figure src="/images/work/mbo-tracker/05-view-kanban.webp" width={2400} height={1505} alt="Kanban board with Not Started, In Progress, Complete and Exceeded columns" caption="Kanban: what should I work on next?" />
-
-## Designing in code
-
-I designed directly in code with IBM Bob, so my team tested a working product, not a prototype. Moving from plain React to Carbon changed how the app works:
-
-- Updating progress became one focused question, with the target locked.
-- Status changes moved into a one-click row menu.
-- Every dialog follows the same layout, so learning one teaches them all.
-
-<Figure src="/images/work/mbo-tracker/16-update-progress.webp" width={2400} height={1505} alt="Update progress dialog with a number input, a locked target and a live progress bar" caption="One question, a locked target and a live preview before saving." />
-
-## Testing
-
-I tested with my team of 12, including my manager. One teammate installed Ollama but got stuck downloading the model, because Ollama's site doesn't explain that step. I made it its own step with the exact command to copy.
+I tested it with my team of 12, including my manager. One teammate installed Ollama but got stuck downloading the model, because Ollama's site doesn't explain that step. I made it its own step with the exact command to copy.
 
 <Callout label="Manager feedback">
-  If this scales, senior leadership could see how every manager and ELH is doing, across the org.
+  If this scales, senior leadership could see how every manager and seller is doing, across the org.
 </Callout>
 
-<Figure src="/images/work/mbo-tracker/14-ai-coaching-summary.webp" width={2400} height={562} alt="AI performance summary written by IBM Granite 3.3" caption="An AI coaching summary, generated entirely on the user's machine." />
+## Why I redesigned it
 
-## Next time
+In a design review, a designer said the app looked "very very AI-generated." The app already used Carbon components and IBM Plex, so Carbon wasn't the problem. The problem was a layer of decoration on top of it, made of patterns that AI tools reach for by default:
 
+- An uppercase label above every section ("OBJECTIVES AT A GLANCE", "PROGRESS BREAKDOWN").
+- Four equal stat cards, each number in a different color.
+- Boxes inside boxes inside boxes.
+- Colored accent borders, rounded pills and hover shadows on a system that is meant to be square and flat.
+- A donut chart where one slice was 93% of the whole.
+- Purple for "Exceeded", blue for four unrelated things, and yellow and orange text that failed contrast.
+
+Looks were only half of it. The audit also found problems that misled people:
+
+- **The completion bars lied.** Each bar was scaled to the largest value, so 14% could fill the whole track.
+- **The first launch said you'd failed.** With no objectives yet, the dashboard showed "Tier 5, 0%, Did not meet KPIs" in red.
+- **Two percentages sat side by side.** "Tier 3, 80%" was the payout. "81%" was average completion. Neither was labeled.
+- **Nothing answered "what next?"** Finding what was behind meant filtering the table or scanning the board.
+- **The AI summary was wrong.** It said "reaching Tier 5 will be within your grasp", but Tier 5 is the lowest tier, and the claim appeared with no label saying AI wrote it.
+
+## What guided version 2
+
+1. **Answer one question first.** The main screen exists to answer "What will I earn, and what do I do next?" Everything else moves down or onto its own page.
+2. **One color, one meaning.** Blue is for actions and progress. Green, yellow and red are only for status, always with an icon and a label so color is never the only signal.
+3. **AI suggests, the app counts.** The app calculates every number. Granite only writes the sentences around them, and it's labeled as AI everywhere it appears.
+4. **Stock Carbon, used properly.** Square corners, one layer of containers and sentence-case headings. The design system does the work, so nothing needs decorating.
+
+## 1. Dashboard to Overview
+
+<Compare
+  before={{ src: "/images/work/mbo-tracker/01-cover-dashboard.webp", width: 2400, height: 1505, alt: "Version 1 dashboard with a tier banner, four stat cards and a donut chart" }}
+  after={{ src: "/images/work/mbo-tracker/v2-01-overview.webp", width: 2400, height: 2414, alt: "Version 2 Overview with the projected tier, a tier scale, a Needs attention list and a table of recent updates" }}
+  caption="The tier now leads, on one honest scale, with the work that would raise it right below."
+/>
+
+**Why:** Version 1 opened with how many objectives were in each status. That's the least useful number for a seller. What they actually want to know is their payout and how to improve it.
+
+**What changed:**
+- The projected tier is the largest text on the screen, beside a scale of every tier. You can see how far you are from the next one.
+- Under it, one sentence turns the gap into a plan: "22.3 points to Tier 3. Finishing any 4 of the 5 open ones below gets you there."
+- **Needs attention** lists the open objectives ranked by how many points each would add to your average.
+- The four stat cards and the donut became one small "This window" breakdown. Progress bars now use a fixed 0 to 125% scale with a marker at 100%.
+
+**How it helps:** The weekly check-in goes from reading four cards, a donut and a banner to reading one number and a short ranked list.
+
+## 2. First launch
+
+<Compare
+  before={{ src: "/images/work/mbo-tracker/06-first-launch.webp", width: 2400, height: 1505, alt: "Version 1 welcome screen with an IBM eyebrow, a two-line marketing headline and feature pills" }}
+  after={{ src: "/images/work/mbo-tracker/v2-02-first-run.webp", width: 2400, height: 1707, alt: "Version 2 empty Overview with import options, a tier that says Not calculated yet, and optional coaching setup" }}
+  caption="A landing page became an empty state that shows the way in."
+/>
+
+**Why:** The old welcome screen was a marketing hero for a tool people had already installed. It also used IBM's name on a personal project. After it, the empty dashboard told new users they'd failed.
+
+**What changed:** The first screen is the real Overview in its empty state. It has one primary action (import the spreadsheet your manager shared), a fallback (add objectives one at a time), and a tier that reads "Not calculated yet. Nothing is marked as missed before then." Coaching is offered, and marked optional.
+
+**How it helps:** New users land in the product, not on an ad for it, and nothing tells them they've failed before they start.
+
+## 3. Objectives, grouped by window
+
+<Compare
+  before={{ src: "/images/work/mbo-tracker/04-view-table.webp", width: 2400, height: 1505, alt: "Version 1 table with three colored tags on every row" }}
+  after={{ src: "/images/work/mbo-tracker/v2-03-objectives.webp", width: 2400, height: 1707, alt: "Version 2 Objectives list grouped by the Jul to Oct window, with Carbon status indicators and fixed-scale progress bars" }}
+  caption="Each row has one status indicator instead of three colored tags. Objectives are grouped by the window they count toward."
+/>
+
+**Why:** Every row repeated its category, window and status as colored tags. The Deadline column was empty for every row. The Kanban board split "Complete" and "Exceeded" into separate columns for the same outcome.
+
+**What changed:**
+- Objectives are grouped by payout window. Each group's header says how many objectives it has, how many days are left and its average. The later window says "Not counted in your tier yet."
+- Status uses Carbon status indicators, which pair an icon, a shape and a label.
+- The board is still there, but behind a List/Board switch, because status isn't a workflow people drag cards through.
+
+**How it helps:** Scanning 30 objectives no longer means reading 90 tags, and it's clear which objectives count toward the payout right now.
+
+## 4. A page for each objective
+
+Version 1 had nowhere to see one objective in depth. Each objective now has its own page with progress against target, a weekly chart, the full progress log, evidence links and notes.
+
+<Figure src="/images/work/mbo-tracker/v2-04-detail.webp" width={2400} height={1987} alt="Objective detail for Make 175 prospecting calls per week, with a 4-week average of 158, a weekly calls chart and a progress log" caption="The chart marks which four weeks make up the current average, and the copy explains what reaching the target is worth." />
+
+## 5. Logging progress shows the result first
+
+<Compare
+  before={{ src: "/images/work/mbo-tracker/16-update-progress.webp", width: 2400, height: 1505, alt: "Version 1 update progress dialog" }}
+  after={{ src: "/images/work/mbo-tracker/v2-08-log-progress.webp", width: 2400, height: 1707, alt: "Version 2 Log progress modal with week, calls, source, a note, and a preview of the new average" }}
+  caption="Before saving, the modal says what the entry will do: the 4-week average would move from 158 to 162, 92% of target."
+/>
+
+**Why:** Sellers log progress to see what it does to their numbers, and version 1 only showed that after saving.
+
+**What changed:** The modal now records the week, the source (Salesloft or a manual count) and an optional note, and previews the new average before you save.
+
+**How it helps:** People see the effect of their work at the moment they record it. The source and note are also what a manager asks for in a one-on-one.
+
+## 6. Import: AI suggests, you confirm
+
+<Compare
+  before={{ src: "/images/work/mbo-tracker/13-import-ai-mapping.webp", width: 2400, height: 1505, alt: "Version 1 mapping review table" }}
+  after={{ src: "/images/work/mbo-tracker/v2-07-import-match.webp", width: 2400, height: 1707, alt: "Version 2 Match columns step, with a notice that Granite matched 8 of 9 fields and a dropdown for each field" }}
+  caption="A three-step flow: upload the file, match columns, then review before importing."
+/>
+
+**What changed:** The import is now three named steps. A notice explains the one field Granite couldn't match and what happens instead. Every match is a dropdown you can change, and the review step names the 2 rows it will skip and why, before you import.
+
+**How it helps:** The AI does the tedious part, but nothing reaches the tracker until a person has seen it.
+
+## 7. Coaching you can check
+
+<Compare
+  before={{ src: "/images/work/mbo-tracker/14-ai-coaching-summary.webp", width: 2400, height: 562, alt: "Version 1 AI performance summary paragraph" }}
+  after={{ src: "/images/work/mbo-tracker/v2-05-coaching.webp", width: 2400, height: 1340, alt: "Version 2 Coaching page with three labeled suggestions linked to objectives, earlier suggestions, and a panel explaining how suggestions work" }}
+  caption="Three specific suggestions with links, an AI label, and a clear note on where the numbers come from."
+/>
+
+**Why:** The old summary was seven paragraphs of encouragement, one of which got the tier system backwards.
+
+**What changed:**
+- Coaching is now three suggestions a week, each tied to a real objective with "Open" and "Mark as done" links.
+- Each set is labeled AI and says when it was written and from what data.
+- A side panel explains that the app calculates every number, that Granite only writes the sentences, and that nothing leaves the computer.
+- Earlier weeks show how many suggestions were acted on.
+
+**How it helps:** Every claim can be traced to a number the app calculated, so an AI mistake is easy to catch instead of easy to trust.
+
+## 8. Local AI setup, kept simple
+
+<Compare
+  before={{ src: "/images/work/mbo-tracker/07-setup-onboarding.webp", width: 2400, height: 3072, alt: "Version 1 AI setup guide" }}
+  after={{ src: "/images/work/mbo-tracker/v2-06-coaching-setup.webp", width: 2400, height: 1480, alt: "Version 2 coaching setup step with a warning that Ollama isn't running, two model options and three copyable commands" }}
+  caption="Setup is step 3 of 3 in onboarding, clearly optional, with the model download as its own step."
+/>
+
+**What changed:** The step from testing stays: downloading the model is its own command to copy. The setup is shorter, sits inside the onboarding progress indicator and is labeled optional, and a side panel lists what Granite can and can't see.
+
+## Iterating on the redesign
+
+The first Figma pass used a Carbon side nav. Once the screens were in, the side nav left a tall empty column beside every page, so I moved navigation into the top header. That gave tables and charts about 250px more width.
+
+Then I critiqued my own redesign as a reviewer would, and ranked what I found:
+
+1. **"50%" still meant two things.** The tier read "Tier 4, 50% payout" and the scale below it read "Tier 4, 50%", where 50% was the completion needed. The scale now says "from 50%", "from 80%" and so on.
+2. **The tier wasn't the first thing you saw.** It was the same size as the page title, and two buttons pulled the eye away. I enlarged the tier, cut the page down to one primary action, and stretched the scale to fill its panel.
+3. **"+6.3 pts" had no explanation.** The list now says the points are what finishing each objective adds to your average.
+4. **The search placeholder failed contrast,** at 2.16:1 in the light theme and 2.30:1 in the dark one. It's now 4.57:1 and 4.86:1, above the WCAG AA minimum.
+5. **Click targets were too small.** The modal close control was an 18px-tall text link and radio buttons were 18px tall. The close control is now a 48px button, and radio buttons are 24px.
+
+Smaller fixes evened out padding, table row heights and page spacing.
+
+## The system behind it
+
+All 21 frames are built from Figma variables for Carbon's Gray 10 and Gray 100 themes, plus a spacing scale and Carbon's productive type scale in IBM Plex Sans. Components such as status indicators, progress bars, fields, notifications and table rows are shared, so dark mode is a mode switch, not a second design.
+
+## What's next
+
+- **Test version 2** with the same team, starting with whether Needs attention changes what people work on each week.
+- **Build it.** Version 1 is already Carbon React, so the redesign is mostly layout and copy changes, not a rewrite.
+- **Confirm the tier rule.** The redesign calculates the tier only from objectives due in the current window, and that needs checking against the compensation plan.
 - **Remove the terminal:** a one-click model download.
-- **Test wider:** more teams, more managers.
-- **Explore before building:** sketch flows and try directions in Figma first.

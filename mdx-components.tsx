@@ -1,8 +1,9 @@
 import type { MDXComponents } from "mdx/types";
-import { Callout, Figure, Stats } from "@/components/case-study/Figure";
+import { Callout, Compare, Figure, Stats } from "@/components/case-study/Figure";
 
 const components: MDXComponents = {
   Figure,
+  Compare,
   Callout,
   Stats,
 };

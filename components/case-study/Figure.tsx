@@ -62,3 +62,36 @@ export function Stats({ items }: { items: { value: string; label: string }[] }) 
     </Reveal>
   );
 }
+
+type Shot = { src: string; alt: string; width: number; height: number };
+
+/** Two images side by side, labelled Before and After. Stacks on small screens. */
+export function Compare({ before, after, caption }: { before: Shot; after: Shot; caption?: string }) {
+  return (
+    <Reveal className="cs-figure">
+      <figure>
+        <div className="cs-compare">
+          {[
+            { label: "Before", shot: before },
+            { label: "After", shot: after },
+          ].map(({ label, shot }) => (
+            <div key={label} className="cs-compare__item">
+              <p className="label">{label}</p>
+              <a href={shot.src} target="_blank" rel="noopener" aria-label={`Open the ${label.toLowerCase()} image full size`}>
+                <Image
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={shot.width}
+                  height={shot.height}
+                  sizes="(max-width: 860px) 100vw, 550px"
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </a>
+            </div>
+          ))}
+        </div>
+        {caption && <figcaption>{caption}</figcaption>}
+      </figure>
+    </Reveal>
+  );
+}
