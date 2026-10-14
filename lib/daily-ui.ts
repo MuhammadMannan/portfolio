@@ -98,6 +98,7 @@ export const shots: Shot[] = [
     image: "/images/daily-ui/day-011.webp",
     caption:
       "Error and success flashes for a database export. The error is stamped right above the table and matches the highlighted rows, asks you to review ambiguous dates instead of guessing, and the success message stays put until you download the file.",
+  },
   {
     day: 12,
     title: "E-commerce shop",
