@@ -98,6 +98,12 @@ export const shots: Shot[] = [
     image: "/images/daily-ui/day-011.webp",
     caption:
       "Error and success flashes for a database export. The error is stamped right above the table and matches the highlighted rows, asks you to review ambiguous dates instead of guessing, and the success message stays put until you download the file.",
+  {
+    day: 12,
+    title: "E-commerce shop",
+    image: "/images/daily-ui/day-012.webp",
+    caption:
+      "A single-item page for the Vans Old Skool built on a visible grid with a waffle-sole tile. Size, price and every way to get it, from shipping to pickup to a nearby store, sit in one panel, and red is saved for the Add to bag button.",
   },
 ];
 
